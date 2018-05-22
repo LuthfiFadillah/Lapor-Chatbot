@@ -7,7 +7,8 @@
 <p>test...</p>
 
 <script>
-    var base_url = window.location.origin;
+    var is_production = true;
+    var base_url = is_production ? window.location.origin : 'http://localhost:8080/Lapor-Chatbot-dev' ;
     var botmanWidget = {
         frameEndpoint: base_url+'/chat.html',
         introMessage: 'Hello, I am a Chatbot',
