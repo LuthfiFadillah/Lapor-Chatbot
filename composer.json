@@ -3,6 +3,7 @@
         "botman/botman": "^2.3",
         "botman/driver-web": "^1.5",
         "botman/driver-telegram": "^1.5",
-        "doctrine/cache": "^1.7"
+        "doctrine/cache": "^1.7",
+        "vlucas/phpdotenv": "^2.4"
     }
 }

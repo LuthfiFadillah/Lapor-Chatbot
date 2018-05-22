@@ -83,4 +83,6 @@ fabric.properties
 .history
 
 /cache/
+.env
 # End of https://www.gitignore.io/api/composer,intellij,visualstudiocode
+
