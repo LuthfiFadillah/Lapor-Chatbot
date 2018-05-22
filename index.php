@@ -9,9 +9,9 @@
 <script>
     var base_url = window.location.origin;
     var botmanWidget = {
-        frameEndpoint: base_url+'/Lapor-Chatbot-dev/chat.html',
+        frameEndpoint: base_url+'/chat.html',
         introMessage: 'Hello, I am a Chatbot',
-        chatServer : base_url+'/Lapor-Chatbot-dev/chat.php',
+        chatServer : base_url+'/chat.php',
         title: 'My Chatbot', 
         mainColor: '#456765',
         bubbleBackground: '#ff76f4',
