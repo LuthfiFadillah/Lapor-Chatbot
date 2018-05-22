@@ -8,7 +8,7 @@
 
 function connect_db(){
     try{
-        $dotenv = new Dotenv\Dotenv(realpath($_SERVER["DOCUMENT_ROOT"]).'/Lapor-Chatbot-dev/' );
+        $dotenv = new Dotenv\Dotenv(realpath($_SERVER["DOCUMENT_ROOT"]));
         $dotenv->load();
 
 
