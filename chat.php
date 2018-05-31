@@ -11,10 +11,13 @@ use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\BotMan\Cache\DoctrineCache;
 use Doctrine\Common\Cache\FilesystemCache;
 
+$dotenv = new Dotenv\Dotenv(realpath($_SERVER["DOCUMENT_ROOT"]) . '/Lapor-Chatbot-dev/');
+$dotenv->load();
+
 $config = [
     // Your driver-specific configuration
      "telegram" => [
-        "token" => "499315223:AAFNxLBji7oynF_HVn6ixv0qi6vbmRkH2a8"
+        "token" => getenv('TELEGRAM_TOKEN')
      ]
 ];
 
@@ -28,8 +31,15 @@ $botman->hears('{command}', function (BotMan $bot, $command) use ($con) {
     $query = "SELECT next_state FROM command WHERE command_pattern='$command'";
     $result = $con->query($query);
     if($col = $result->fetch(PDO::FETCH_NUM)){
-        $bot->startConversation(new LaporConversation($col[0]));
+        //create laporan entry in database
+        $laporanid = mt_rand(1, 999999);
+        $query = "INSERT INTO laporan (id) VALUES ($laporanid)";
+        $result = $con->query($query);
+
+        //start conversation
+        $bot->startConversation(new LaporConversation($col[0],$laporanid));
     } else {
+        //no command matches in database
         $bot->reply('Salah memasukkan perintah!');
     }
 });

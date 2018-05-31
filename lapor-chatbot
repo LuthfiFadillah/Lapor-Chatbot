@@ -1,0 +1,180 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.0
+-- Dumped by pg_dump version 10.0
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: command; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE command (
+    id integer NOT NULL,
+    command_type character varying(100) NOT NULL,
+    command_pattern character varying(100) NOT NULL,
+    next_state character varying(100) NOT NULL
+);
+
+
+ALTER TABLE command OWNER TO postgres;
+
+--
+-- Name: conversation; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE conversation (
+    id integer NOT NULL,
+    command_type character varying(100) NOT NULL,
+    state character varying(100) NOT NULL,
+    datatype character varying(100) NOT NULL,
+    text_conversation character varying(1000) NOT NULL,
+    next_state character varying(100) NOT NULL,
+    pattern character varying
+);
+
+
+ALTER TABLE conversation OWNER TO postgres;
+
+--
+-- Name: laporan; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE laporan (
+    id integer NOT NULL,
+    nama character varying(1000),
+    phone character varying(100),
+    email character varying(100),
+    laporan character varying(1000),
+    trackingid character varying(100),
+    transaksiid character varying(100)
+);
+
+
+ALTER TABLE laporan OWNER TO postgres;
+
+--
+-- Name: laporan_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE laporan_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE laporan_id_seq OWNER TO postgres;
+
+--
+-- Name: laporan_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE laporan_id_seq OWNED BY laporan.id;
+
+
+--
+-- Name: laporan id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY laporan ALTER COLUMN id SET DEFAULT nextval('laporan_id_seq'::regclass);
+
+
+--
+-- Data for Name: command; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY command (id, command_type, command_pattern, next_state) FROM stdin;
+1	lapor	Lapor	name
+\.
+
+
+--
+-- Data for Name: conversation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY conversation (id, command_type, state, datatype, text_conversation, next_state, pattern) FROM stdin;
+2	lapor	phone	phone	tuliskan nomor telpon kamu!	email	\\+?\\d{1,4}?[-.\\s]?\\(?\\d{1,3}?\\)?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}
+4	lapor	laporan	laporan	tuliskan Laporan kamu!	konfirmasi	.*
+3	lapor	email	email	tuliskan email kamu!	laporan	^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$
+1	lapor	name	nama	Halo! Nama kamu siapa?	phone	^([a-zA-Z' ]+)$
+5	lapor	konfirmasi	-	Baik, laporan sudah kami terima. Harap simpan Tracking ID untuk pemantauan laporan lebih lanjut. Tracking ID kamu adalah : 	lapor	Lapor|lapor
+\.
+
+
+--
+-- Data for Name: laporan; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY laporan (id, nama, phone, email, laporan, trackingid, transaksiid) FROM stdin;
+984751	Luthfi	081298499147	bl4ck.luthfi@gmail.com	Testing	1979915	38955
+622864	Luthfi	081298499147	bl4ck.luthfi@gmail.com	Testing	1979963	38956
+\.
+
+
+--
+-- Name: laporan_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('laporan_id_seq', 1, false);
+
+
+--
+-- Name: command command_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY command
+    ADD CONSTRAINT command_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: conversation conversation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY conversation
+    ADD CONSTRAINT conversation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: laporan laporan_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY laporan
+    ADD CONSTRAINT laporan_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

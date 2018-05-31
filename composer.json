@@ -4,6 +4,7 @@
         "botman/driver-web": "^1.5",
         "botman/driver-telegram": "^1.5",
         "doctrine/cache": "^1.7",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "guzzlehttp/guzzle": "~6.0"
     }
 }
