@@ -11,7 +11,7 @@ use BotMan\BotMan\Drivers\DriverManager;
 use BotMan\BotMan\Cache\DoctrineCache;
 use Doctrine\Common\Cache\FilesystemCache;
 
-$dotenv = new Dotenv\Dotenv(realpath($_SERVER["DOCUMENT_ROOT"]) . '/Lapor-Chatbot-dev/');
+$dotenv = new Dotenv\Dotenv(realpath($_SERVER["DOCUMENT_ROOT"]) . '/Lapor-Chatbot/');
 $dotenv->load();
 
 $config = [

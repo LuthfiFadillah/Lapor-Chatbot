@@ -6,7 +6,7 @@
  * Time: 13:47
  */
 
-require_once realpath($_SERVER["DOCUMENT_ROOT"]) . '/Lapor-Chatbot-dev/mysql/connect_db.php';
+require_once realpath($_SERVER["DOCUMENT_ROOT"]) . '/Lapor-Chatbot/mysql/connect_db.php';
 
 use BotMan\BotMan\Messages\Conversations\Conversation;
 use BotMan\BotMan\Messages\Incoming\Answer;
